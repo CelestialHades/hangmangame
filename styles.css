@@ -18,6 +18,13 @@ body { /* Targets the entire body of the page */
     width: 400px; /* Sets a fixed width for the container */
   }
   
+  #hangman { /* Targets the pre element for the hangman graphic */
+    font-family: monospace; /* Uses a monospace font for consistent spacing */
+    font-size: 16px; /* Sets font size for readability */
+    margin: 20px 0; /* Adds vertical spacing */
+    line-height: 1; /* Reduces line height for tighter spacing */
+  }
+  
   #wordDisplay { /* Targets the word display div */
     font-size: 36px; /* Sets a large font size for visibility */
     margin: 20px 0; /* Adds vertical spacing */

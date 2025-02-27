@@ -4,8 +4,20 @@ const guessesLeftDisplay = document.getElementById('guessesLeft'); // Selects th
 const guessedLettersDisplay = document.getElementById('guessedLetters'); // Selects the div for guessed letters
 const letterInput = document.getElementById('letterInput'); // Selects the input field for letter guesses
 const messageDisplay = document.getElementById('message'); // Selects the div for game messages
+const hangmanDisplay = document.getElementById('hangman'); // Selects the pre element for the hangman graphic
 
-// 2. Game setup
+// 2. Hangman stages (ASCII art for each wrong guess)
+const hangmanStages = [ // Array of hangman graphics, indexed by remaining guesses (6 to 0)
+  `  +---+\n  |   |\n      |\n      |\n      |\n      |\n=========`, // 6 guesses left (empty gallows)
+  `  +---+\n  |   |\n  O   |\n      |\n      |\n      |\n=========`, // 5 guesses left (head)
+  `  +---+\n  |   |\n  O   |\n  |   |\n      |\n      |\n=========`, // 4 guesses left (body)
+  `  +---+\n  |   |\n  O   |\n /|   |\n      |\n      |\n=========`, // 3 guesses left (left arm)
+  `  +---+\n  |   |\n  O   |\n /|\\  |\n      |\n      |\n=========`, // 2 guesses left (right arm)
+  `  +---+\n  |   |\n  O   |\n /|\\  |\n /    |\n      |\n=========`, // 1 guess left (left leg)
+  `  +---+\n  |   |\n  O   |\n /|\\  |\n / \\  |\n      |\n=========` // 0 guesses left (right leg, game over)
+];
+
+// 3. Game setup
 const words = ['javascript', 'hangman', 'coding', 'challenge', 'game']; // Array of possible words to guess
 let currentWord = ''; // Stores the word to be guessed
 let displayWord = []; // Array to track revealed letters and underscores
@@ -13,7 +25,7 @@ let guessedLetters = []; // Array to track guessed letters
 let guessesLeft = 6; // Number of incorrect guesses allowed
 let gameActive = true; // Flag to control game state
 
-// 3. Function to start a new game
+// 4. Function to start a new game
 function startGame() { // Defines a function to initialize or reset the game
   const randomIndex = Math.floor(Math.random() * words.length); // Picks a random index from the words array
   currentWord = words[randomIndex]; // Sets the current word to the randomly chosen one
@@ -27,14 +39,15 @@ function startGame() { // Defines a function to initialize or reset the game
   letterInput.focus(); // Focuses the input field for immediate typing
 }
 
-// 4. Function to update the display
+// 5. Function to update the display
 function updateDisplay() { // Defines a function to refresh the UI
   wordDisplay.textContent = displayWord.join(' '); // Joins displayWord with spaces and shows it
   guessesLeftDisplay.textContent = `Guesses Left: ${guessesLeft}`; // Updates guesses left display
   guessedLettersDisplay.textContent = `Guessed Letters: ${guessedLetters.join(', ')}`; // Shows guessed letters
+  hangmanDisplay.textContent = hangmanStages[6 - guessesLeft]; // Updates hangman graphic based on guesses left
 }
 
-// 5. Function to guess a letter
+// 6. Function to guess a letter
 function guessLetter() { // Defines a function to handle a letter guess
   if (!gameActive) return; // Exits if the game is not active
   
@@ -74,19 +87,17 @@ function guessLetter() { // Defines a function to handle a letter guess
   updateDisplay(); // Updates the UI after the guess
 }
 
-//6. function to reset game
-
-function resetGame() {
-    startGame();
+// 7. Function to reset the game
+function resetGame() { // Defines a function to start a new game
+  startGame(); // Calls startGame to reset everything
 }
 
-//7. event listener for entry key
-letterInput.addEventListener('keypress', (event) => {
-    if (event.key === 'enter') {
-        guessLetter();
-    }
+// 8. Event listener for Enter key
+letterInput.addEventListener('keypress', (event) => { // Listens for keypress events on the input
+  if (event.key === 'Enter') { // Checks if the pressed key is Enter
+    guessLetter(); // Calls guessLetter if Enter is pressed
+  }
 });
 
-//8. initial game start
-
-startGame();
+// 9. Initial game start
+startGame(); // Starts the game when the page loads

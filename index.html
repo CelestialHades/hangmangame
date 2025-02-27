@@ -1,22 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman game</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="game-container">
-        <h1>Hangman game</h1>
-        <div id="wordDisplay"></div>
-        <div id="guessesLeft">Guessed left: 6</div>
-        <div id="guessedLetters">Guessed Letters:</div>
-        <input type="text" placeholder="Guess a letter" id="letterInput">
-        <button id="guess" onclick="guessLetter()">Guess</button>
-        <button id="reset" onclick="resetGame()">Reset</button>
-        <div id="message"></div>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+<!DOCTYPE html> <!-- Declares the document type as HTML5 -->
+<html lang="en"> <!-- Sets the document root with English as the language -->
+<head> <!-- Contains metadata about the document -->
+  <meta charset="UTF-8"> <!-- Specifies UTF-8 character encoding for special characters -->
+  <title>Hangman Game</title> <!-- Sets the browser tab title to "Hangman Game" -->
+  <link rel="stylesheet" href="styles.css"> <!-- Links the external CSS file for styling -->
+</head> <!-- Closes the head section -->
+<body> <!-- Begins the visible content of the page -->
+  <div class="game-container"> <!-- Main container for the Hangman game -->
+    <h1>Hangman Game</h1> <!-- Heading for the game -->
+    <pre id="hangman"></pre> <!-- Preformatted text element to display the hangman graphic -->
+    <div id="wordDisplay"></div> <!-- Displays the word with underscores and revealed letters -->
+    <div id="guessesLeft">Guesses Left: 6</div> <!-- Shows remaining incorrect guesses -->
+    <div id="guessedLetters">Guessed Letters: </div> <!-- Shows letters already guessed -->
+    <input type="text" id="letterInput" maxlength="1" placeholder="Guess a letter"> <!-- Input for guessing a letter -->
+    <button id="guess" onclick="guessLetter()">Guess</button> <!-- Button to submit the guess -->
+    <button id="reset" onclick="resetGame()">Reset</button> <!-- Button to start a new game -->
+    <div id="message"></div> <!-- Displays win/lose messages -->
+  </div> <!-- Closes the main container -->
+  <script src="script.js"></script> <!-- Links the external JavaScript file for functionality -->
+</body> <!-- Closes the body section -->
+</html> <!-- Closes the HTML document -->
